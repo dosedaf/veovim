@@ -1,0 +1,14 @@
+{
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true,
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.statusBar.visible": false,
+    "workbench.sideBar.location": "right",
+    "workbench.activityBar.location": "hidden",
+    "workbench.colorTheme": "Ayu Dark Bordered"
+}

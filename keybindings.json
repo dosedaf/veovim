@@ -1,0 +1,76 @@
+[
+    {
+        "command": "workbench.action.focusActivityBar",
+        "key": "space z",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    {
+        "command": "workbench.action.activityBarLocation.hide",
+        "key": "space x",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    {
+        "command": "workbench.action.toggleMenuBar",
+        "key": "space c",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    // focus explorer, switch focus to explorer
+    {
+        "command": "workbench.view.explorer",
+        "key": "space f",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    {
+        "command": "workbench.view.extensions",
+        "key":"space e",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    // toggle doang, show sidebar, focus masih di editor, gabisa ctrl+b buat toggle lagi
+    {
+        "command": "workbench.action.toggleSidebarVisibility",
+        "key": "space v",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    // toggle doang,
+    {
+        "key": "space f",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "filesExplorerFocus && explorerViewletFocus",
+    },
+    // ganti file
+    {
+        "command": "workbench.action.quickOpen",
+        "key": "space o",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    // focus terminal
+    {
+        "command": "workbench.action.terminal.focus",
+        "key": "space t",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    {
+        "command": "find-it-faster.findWithinFiles",
+        "key": "space space",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-actions.find",
+        "when": "editorFocus || editorIsOpen"
+    },
+    {
+        "key": "ctrl+shift+x",
+        "command": "-workbench.view.extensions",
+        "when": "viewContainer.workbench.view.extensions.enabled"
+    },
+    {
+        "key": "ctrl+k e",
+        "command": "-workbench.files.action.focusOpenEditorsView",
+        "when": "workbench.explorer.openEditorsView.active"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "-workbench.action.quickOpen"
+    },
+]

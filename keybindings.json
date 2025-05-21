@@ -49,11 +49,13 @@
         "key": "space t",
         "when": "editorTextFocus && neovim.mode != insert",
     },
+    /*
     {
         "command": "find-it-faster.findWithinFiles",
         "key": "space space",
         "when": "editorTextFocus && neovim.mode != insert",
     },
+    */
     {
         "key": "ctrl+f",
         "command": "-actions.find",

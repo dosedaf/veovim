@@ -10,5 +10,6 @@
     "workbench.statusBar.visible": false,
     "workbench.sideBar.location": "right",
     "workbench.activityBar.location": "hidden",
-    "workbench.colorTheme": "Ayu Dark Bordered"
+    "workbench.colorTheme": "Ayu Dark Bordered",
+    "redhat.telemetry.enabled": false
 }

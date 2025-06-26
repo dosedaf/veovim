@@ -1,78 +1,84 @@
 [
-    {
-        "command": "workbench.action.focusActivityBar",
-        "key": "space z",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    {
-        "command": "workbench.action.activityBarLocation.hide",
-        "key": "space x",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    {
-        "command": "workbench.action.toggleMenuBar",
-        "key": "space c",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    // focus explorer, switch focus to explorer
-    {
-        "command": "workbench.view.explorer",
-        "key": "space f",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    {
-        "command": "workbench.view.extensions",
-        "key":"space e",
-        "when": "editorTextFocus && neovim.mode != insert"
-    },
-    // toggle doang, show sidebar, focus masih di editor, gabisa ctrl+b buat toggle lagi
-    {
-        "command": "workbench.action.toggleSidebarVisibility",
-        "key": "space v",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    // toggle doang,
-    {
-        "key": "space f",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "filesExplorerFocus && explorerViewletFocus",
-    },
-    // ganti file
-    {
-        "command": "workbench.action.quickOpen",
-        "key": "space o",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    // focus terminal
-    {
-        "command": "workbench.action.terminal.focus",
-        "key": "space t",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    /*
-    {
-        "command": "find-it-faster.findWithinFiles",
-        "key": "space space",
-        "when": "editorTextFocus && neovim.mode != insert",
-    },
-    */
-    {
-        "key": "ctrl+f",
-        "command": "-actions.find",
-        "when": "editorFocus || editorIsOpen"
-    },
-    {
-        "key": "ctrl+shift+x",
-        "command": "-workbench.view.extensions",
-        "when": "viewContainer.workbench.view.extensions.enabled"
-    },
-    {
-        "key": "ctrl+k e",
-        "command": "-workbench.files.action.focusOpenEditorsView",
-        "when": "workbench.explorer.openEditorsView.active"
-    },
-    {
-        "key": "ctrl+e",
-        "command": "-workbench.action.quickOpen"
-    },
+  // Activity Bar & Sidebar (Space Leader)
+  { "key": "space z", "command": "workbench.action.focusActivityBar", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space x", "command": "workbench.action.activityBarLocation.hide", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space c", "command": "workbench.action.toggleMenuBar", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space v", "command": "workbench.action.toggleSidebarVisibility", "when": "editorTextFocus && neovim.mode != insert" },
+
+  // LSP Features (Space Leader)
+  { "key": "space d", "command": "editor.action.goToDeclaration", "when": "editorHasDeclarationProvider && editorTextFocus && neovim.mode != insert" },
+  { "key": "space i", "command": "editor.action.goToImplementation", "when": "editorHasImplementationProvider && editorTextFocus && neovim.mode != insert" },
+  { "key": "space r", "command": "editor.action.rename", "when": "editorHasRenameProvider && editorTextFocus && neovim.mode != insert" },
+  { "key": "space a", "command": "editor.action.quickFix", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space h", "command": "editor.action.showHover", "when": "editorTextFocus && neovim.mode != insert" },
+
+  // Neovim Mode Navigation (Space Leader)
+  { "key": "space f", "command": "workbench.view.explorer", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space e", "command": "workbench.view.extensions", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space g", "command": "workbench.view.scm", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space t", "command": "workbench.action.terminal.focus", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space o", "command": "workbench.action.quickOpen", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space p", "command": "workbench.action.showCommands", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space b", "command": "workbench.action.showAllEditors", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space j", "command": "workbench.action.gotoSymbol", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space /", "command": "workbench.action.findInFiles", "when": "editorTextFocus && neovim.mode != insert" },
+
+  // Neovim Mode Common Actions (Space Leader)
+  { "key": "space s", "command": "workbench.action.files.save", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space w", "command": "workbench.action.closeActiveEditor", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space l", "command": "workbench.actions.view.problems", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space rr", "command": "rest-client.request", "when": "editorTextFocus && neovim.mode != insert" },
+  { "key": "space md", "command": "markdown.showPreview", "when": "editorTextFocus && neovim.mode != insert" },
+
+  // Global Navigation Shortcuts (CTRL+ALT Leader)
+  { "key": "ctrl+alt+f", "command": "workbench.view.explorer" },
+  { "key": "ctrl+alt+e", "command": "workbench.view.extensions" },
+  { "key": "ctrl+alt+g", "command": "workbench.view.scm" },
+  { "key": "ctrl+alt+t", "command": "workbench.action.terminal.focus" },
+  { "key": "ctrl+alt+o", "command": "workbench.action.quickOpen" },
+  { "key": "ctrl+alt+p", "command": "workbench.action.showCommands" },
+  { "key": "ctrl+alt+b", "command": "workbench.action.showAllEditors" },
+  { "key": "ctrl+alt+j", "command": "workbench.action.gotoSymbol" },
+  { "key": "ctrl+alt+slash", "command": "workbench.action.findInFiles" },
+  { "key": "ctrl+alt+s", "command": "workbench.action.files.save" },
+  { "key": "ctrl+alt+w", "command": "workbench.action.closeActiveEditor" },
+  { "key": "ctrl+alt+l", "command": "workbench.actions.view.problems" },
+  { "key": "ctrl+alt+r", "command": "rest-client.request" },
+  { "key": "ctrl+alt+m", "command": "markdown.showPreview" },
+  { "key": "ctrl+alt+v", "command": "workbench.action.toggleSidebarVisibility"},
+
+  // Global Buffer Navigation
+  { "key": "ctrl+tab", "command": "workbench.action.nextEditor" },
+  { "key": "ctrl+shift+tab", "command": "workbench.action.previousEditor" },
+  { "key": "alt+1", "command": "workbench.action.openEditorAtIndex1" },
+  { "key": "alt+2", "command": "workbench.action.openEditorAtIndex2" },
+  { "key": "alt+3", "command": "workbench.action.openEditorAtIndex3" },
+
+  // Global Clipboard
+  { "key": "ctrl+c", "command": "editor.action.clipboardCopyAction", "when": "editorTextFocus" },
+  { "key": "ctrl+x", "command": "editor.action.clipboardCutAction", "when": "editorTextFocus" },
+
+  // Global Diagnostics Navigation
+  { "key": "alt+]", "command": "editor.action.marker.next" },
+  { "key": "alt+[", "command": "editor.action.marker.prev" },
+  
+  // Unbind Conflicting Defaults
+  { "key": "ctrl+f", "command": "-actions.find" },
+  { "key": "ctrl+shift+x", "command": "-workbench.view.extensions" },
+  { "key": "ctrl+k e", "command": "-workbench.files.action.focusOpenEditorsView" },
+  { "key": "ctrl+e", "command": "-workbench.action.quickOpen" },
+  
+  // Miscellaneous
+  {
+    "key": "ctrl+alt+i",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "editorTextFocu == false"
+  },
+  {
+    "key": "ctrl+shift+k",
+    "command": "-editor.action.deleteLines",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  { "key": "ctrl+shift+k", "command": "editor.action.deleteLines", "when": "textInputFocus && !editorReadonly"
+}
 ]

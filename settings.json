@@ -1,15 +1,38 @@
 {
-    "editor.minimap.enabled": false,
-    "editor.stickyScroll.enabled": false,
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
-    },
-    "editor.fontFamily": "JetBrains Mono",
-    "editor.fontLigatures": true,
-    "go.toolsManagement.autoUpdate": true,
-    "workbench.statusBar.visible": false,
-    "workbench.sideBar.location": "right",
-    "workbench.activityBar.location": "hidden",
-    "workbench.colorTheme": "Ayu Dark Bordered",
-    "redhat.telemetry.enabled": false
+  "editor.minimap.enabled": false,
+  "editor.stickyScroll.enabled": false,
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true,
+  "workbench.statusBar.visible": false,
+  "workbench.sideBar.location": "right",
+  "workbench.activityBar.location": "hidden",
+  "workbench.colorTheme": "Ayu Dark",
+
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+
+  /*
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.mac": "/opt/homebrew/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.windows": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
+  "vscode-neovim.useCtrlKeysForInsertMode": false,
+  */
+
+  "go.useLanguageServer": true,
+  "go.toolsManagement.autoUpdate": true,
+  "go.formatTool": "gopls",
+  "go.lintTool": "golangci-lint",
+  "go.lintOnSave": "file",
+  "go.testOnSave": true,
+  "go.vetOnSave": "off",
+
+  "rest-client.previewOption": "exchange",
+  "rest-client.timeoutInMilliseconds": 10000,
+
+  "markdown.preview.breaks": true,
+  "markdown.preview.fontSize": 14,
+  "markdown.preview.lineHeight": 1.6,
+
+  "redhat.telemetry.enabled": false
 }

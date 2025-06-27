@@ -74,11 +74,11 @@
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "editorTextFocu == false"
   },
+  
+  // remove
   {
-    "key": "ctrl+shift+k",
-    "command": "-editor.action.deleteLines",
-    "when": "textInputFocus && !editorReadonly"
+    "key": "ctrl+k ctrl+k",
+    "command": "-editor.action.defineKeybinding",
+    "when": "resource == 'vscode-userdata:/c%3A/Users/acer/AppData/Roaming/Code/User/profiles/-5521c415/keybindings.json'"
   },
-  { "key": "ctrl+shift+k", "command": "editor.action.deleteLines", "when": "textInputFocus && !editorReadonly"
-}
 ]

@@ -12,16 +12,9 @@
     "asvetliakov.vscode-neovim": 1
   },
 
-  /*
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.mac": "/opt/homebrew/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.windows": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
-  "vscode-neovim.useCtrlKeysForInsertMode": false,
-  */
-
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
-  "go.formatTool": "gopls",
+  // "go.formatTool": "gopls",
   "go.lintTool": "golangci-lint",
   "go.lintOnSave": "file",
   "go.testOnSave": true,
@@ -34,5 +27,14 @@
   "markdown.preview.fontSize": 14,
   "markdown.preview.lineHeight": 1.6,
 
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+
+  "[solidity]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "editor.formatOnSave": true
 }

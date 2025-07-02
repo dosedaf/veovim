@@ -1,148 +1,132 @@
-# Distraction-Free Neovim: A VS Code Profile
+# Ergonomic Neovim: A VS Code Profile for Compact Keyboards
 
-This Visual Studio Code profile is meticulously crafted for a keyboard-centric, minimalist workflow that leverages the full power of Neovim's modal editing. It strips away UI clutter and provides fast, intuitive keybindings, allowing for deep focus on the code.
+This Visual Studio Code profile has been completely refactored for an ergonomic, keyboard-centric workflow, specifically tailored for **60% and other compact keyboards**. It eliminates uncomfortable key combinations in favor of a fast, logical, and comfortable leader key system.
 
-It's designed for a polyglot developer with strong support for **Go**, **Python**, **C++**, and **Java**, but is flexible enough for any language.
-
-## Core Philosophy
-
-* **Keyboard is King:** Every common action is mapped to an intuitive keybinding, accessible without touching the mouse.
-* **Modal Editing First:** The setup is built around the `asvetliakov.vscode-neovim` extension. The keybindings and editor behavior assume you live in Normal, Insert, and Visual modes.
-* **Minimalist & Distraction-Free UI:** The status bar, activity bar, and minimap are hidden by default to maximize screen real estate and focus. The sidebar is moved to the right to prevent layout shifts when opened.
-* **Powerful Tooling Under the Hood:** While the UI is minimal, the profile is packed with powerful extensions for linting (`golangci-lint`), language support (`gopls`, `Pylance`), debugging, API testing, and Git integration (`GitLens`).
-
-## Key Features
-
--   **Dual Leader Key System:**
-    -   **`<Space>` Leader (Normal Mode):** The primary leader key for all editor and workbench actions while in Neovim's Normal Mode.
-    -   **`Ctrl+Alt` Leader (Global):** A universal leader key that works in any mode or context, providing consistent access to core functions.
--   **Curated for Go Development:** Includes settings for `gopls`, auto-linting, and testing on save.
--   **Aesthetic & Readable:** Uses the "Ayu Dark" theme with the "JetBrains Mono" font and ligatures enabled for a clean, modern look.
--   **Integrated API & Data Tools:** Comes with REST Client for API testing and Rainbow CSV for data files.
--   **Rich Language Support:** Pre-configured for Go, Python, Java, C++, and Docker, with powerful language servers and debuggers.
+The entire configuration is built around the **VSCode Neovim** extension, assuming a modal editing workflow where the keyboard is your primary tool.
 
 ---
 
-## Installation & Setup
+## Core Philosophy
+
+- **Ergonomics First:** Every keybinding is designed to reduce hand strain. Uncomfortable combinations like `Ctrl+Alt` have been completely replaced with simpler, more accessible patterns.
+- **Leader Keys are King:** Instead of complex chords requiring multiple simultaneous key presses, this setup relies on easy-to-press leader keys (`Alt` and `<Space>`) followed by simple, mnemonic characters.
+- **Logical Namespaces:** Commands are grouped into intuitive "menus" under the `<Space>` leader. Want to do something with a terminal? All commands start with `space t`. Language-specific actions? `space l`. This makes the system predictable and easy to learn.
+- **Distraction-Free UI:** The profile is designed to work with a minimalist UI (hidden activity bar, status bar, etc.) to maximize focus on the code.
+
+---
+
+## Key Features
+
+- **Dual Leader Key System:**
+  - **`Alt` Leader (Global):** Your go-to for essential, global workbench actions like toggling UI panels. It's simple, fast, and works from anywhere in VS Code.
+  - **`<Space>` Leader (Modal):** Your primary command center while in Neovim's Normal Mode. It's a powerful and organized menu for all file, project, and editor-specific actions.
+- **Optimized for Compact Keyboards:** By avoiding multi-modifier chords, this setup is perfect for 60% layouts where function keys and other keys are on different layers.
+- **Full Neovim Integration:** All `<Space>` keybindings are carefully configured with `when` clauses to only be active outside of Insert Mode, ensuring the spacebar works as expected when typing.
+
+---
+
+## Installation
 
 ### Prerequisites
 
-You **must** have [Neovim](https://neovim.io/) (v0.5.0 or newer) installed and available in your system's PATH. This extension embeds a real Neovim instance.
+You **must** have [Neovim](https://neovim.io/) (v0.5.0 or newer) installed and available in your system's PATH.
 
-### Method 1: Import from Profile File (Recommended)
+### Steps
 
-1.  Export this profile from your source machine: `Gear Icon > Profiles > Export Profile...`.
-2.  Save the `.code-profile` file.
-3.  On the new machine, go to `Gear Icon > Profiles > Import Profile...` and select the saved file.
+1.  **Install Extensions:** Run the command below in your terminal to install all the necessary extensions for this profile.
 
-### Method 2: Manual Setup
+    ```bash
+    #!/bin/bash
+    EXTENSIONS=(
+      "asvetliakov.vscode-neovim"
+      "eamodio.gitlens"
+      "formulahendry.code-runner"
+      "golang.go"
+      "humao.rest-client"
+      "kevinrose.vsc-python-indent"
+      "mechatroner.rainbow-csv"
+      "ms-azuretools.vscode-docker"
+      "ms-python.python"
+      "ms-python.vscode-pylance"
+      "ms-toolsai.jupyter"
+      "ms-vscode.cpptools"
+      "redhat.java"
+      "teabyii.ayu"
+      "usernamehw.errorlens"
+      "visualstudioexptteam.vscodeintellicode"
+      "vscjava.vscode-java-pack"
+      "wakatime.vscode-wakatime"
+    )
 
-If you prefer a manual setup or want to integrate this into your dotfiles:
+    for extension in ${EXTENSIONS[@]}; do
+      code --install-extension $extension
+    done
+    ```
 
-**1. Install the Extensions:**
+2.  **Configure `keybindings.json`:** Replace the entire contents of your `keybindings.json` file (`Preferences: Open Keyboard Shortcuts (JSON)`) with the new configuration.
 
-Run the following command in your terminal to install all the required extensions.
-
-```bash
-#!/bin/bash
-# A list of extensions from the profile
-EXTENSIONS=(
-  "asvetliakov.vscode-neovim"
-  "bartoszmaka95.onedark"
-  "eamodio.gitlens"
-  "formulahendry.code-runner"
-  "golang.go"
-  "humao.rest-client"
-  "icrawl.discord-vscode"
-  "kevinrose.vsc-python-indent"
-  "leonardssh.vscord"
-  "mechatroner.rainbow-csv"
-  "ms-azuretools.vscode-containers"
-  "ms-azuretools.vscode-docker"
-  "ms-python.debugpy"
-  "ms-python.python"
-  "ms-python.vscode-pylance"
-  "ms-toolsai.jupyter"
-  "ms-toolsai.jupyter-keymap"
-  "ms-toolsai.jupyter-renderers"
-  "ms-toolsai.vscode-jupyter-cell-tags"
-  "ms-toolsai.vscode-jupyter-slideshow"
-  "ms-vscode.cmake-tools"
-  "ms-vscode.cpptools"
-  "ms-vscode.cpptools-extension-pack"
-  "ms-vscode.cpptools-themes"
-  "ms-vscode.vscode-typescript-next"
-  "redhat.java"
-  "teabyii.ayu"
-  "tomrijndorp.find-it-faster"
-  "usernamehw.errorlens"
-  "visualstudioexptteam.intellicode-api-usage-examples"
-  "visualstudioexptteam.vscodeintellicode"
-  "vscjava.vscode-gradle"
-  "vscjava.vscode-java-debug"
-  "vscjava.vscode-java-dependency"
-  "vscjava.vscode-java-pack"
-  "vscjava.vscode-java-test"
-  "vscjava.vscode-maven"
-  "wakatime.vscode-wakatime"
-)
-
-for extension in ${EXTENSIONS[@]}; do
-  code --install-extension $extension
-done
-```
-
-**2. Configure `settings.json`:**
-
-Copy the contents of your `settings.json` file into `Preferences: Open User Settings (JSON)`.
-
-**3. Configure `keybindings.json`:**
-
-Copy the contents of your `keybindings.json` file into `Preferences: Open Keyboard Shortcuts (JSON)`.
+3.  **Configure `settings.json`:** Ensure your `settings.json` reflects your minimalist UI preferences (hiding activity bar, etc.).
 
 ---
 
 ## Keybinding Cheatsheet
 
-### `<Space>` Leader (Neovim Normal Mode)
+### Global Leader Key: `Alt`
 
-| Key         | Command                                | Description                      |
-| :---------- | :------------------------------------- | :------------------------------- |
-| `Space` `f` | `workbench.view.explorer`              | Toggle File Explorer             |
-| `Space` `p` | `workbench.action.showCommands`        | Show Command Palette             |
-| `Space` `o` | `workbench.action.quickOpen`           | Quick Open File (Go to File)     |
-| `Space` `b` | `workbench.action.showAllEditors`      | Show All Open Editors (Buffers)  |
-| `Space` `/` | `workbench.action.findInFiles`         | Find in Files (Project-wide)     |
-| `Space` `t` | `workbench.action.terminal.focus`      | Focus Integrated Terminal        |
-| `Space` `v` | `workbench.action.toggleSidebarVisibility` | Toggle Sidebar Visibility        |
-| `Space` `g` | `workbench.view.scm`                   | Show Source Control (Git) Panel  |
-| `Space` `s` | `workbench.action.files.save`          | Save Current File                |
-| `Space` `w` | `workbench.action.closeActiveEditor`   | Close Active Editor (Window)     |
+These are your instant-access global commands that work from anywhere.
 
-#### LSP & Diagnostics (`<Space>` Leader)
+| Key     | Command                                        | Description                  |
+| :------ | :--------------------------------------------- | :--------------------------- |
+| `alt+f` | `workbench.view.explorer`                      | Toggle File Explorer         |
+| `alt+o` | `workbench.action.quickOpen`                   | Quick Open File (Go to File) |
+| `alt+t` | `workbench.action.terminal.focus`              | Focus Terminal               |
+| `alt+p` | `workbench.action.showCommands`                | Show Command Palette         |
+| `alt+g` | `workbench.view.scm`                           | Show Git/SCM Panel           |
+| `alt+v` | `workbench.action.toggleSidebarVisibility`     | Toggle Sidebar Visibility    |
+| `alt+a` | `workbench.action.toggleActivityBarVisibility` | Toggle Activity Bar          |
+| `alt+m` | `workbench.action.toggleMenuBar`               | Toggle Menu Bar              |
 
-| Key         | Command                            | Description                     |
-| :---------- | :--------------------------------- | :------------------------------ |
-| `Space` `d` | `editor.action.goToDeclaration`    | Go to Declaration/Definition    |
-| `Space` `i` | `editor.action.goToImplementation` | Go to Implementation            |
-| `Space` `r` | `editor.action.rename`             | Rename Symbol                   |
-| `Space` `a` | `editor.action.quickFix`           | Show Quick Fixes (Code Actions) |
-| `Space` `h` | `editor.action.showHover`          | Show Hover Information          |
-| `Space` `l` | `workbench.actions.view.problems`  | Show Problems Panel             |
+### Primary Leader Key: `<Space>` (Normal Mode Only)
 
-### `Ctrl+Alt` Leader (Global)
+This is your main command menu from within Neovim's Normal Mode.
 
-These shortcuts work from anywhere in VS Code, regardless of mode.
+#### File & Buffer (`<Space> f`, `<Space> b`)
 
-| Key              | Command                                | Description                   |
-| :--------------- | :------------------------------------- | :---------------------------- |
-| `Ctrl+Alt` `f`   | `workbench.view.explorer`              | Toggle File Explorer          |
-| `Ctrl+Alt` `p`   | `workbench.action.showCommands`        | Show Command Palette          |
-| `Ctrl+Alt` `o`   | `workbench.action.quickOpen`           | Quick Open File (Go to File)  |
-| `Ctrl+Alt` `t`   | `workbench.action.terminal.focus`      | Focus Integrated Terminal     |
-| `Ctrl+Alt` `v`   | `workbench.action.toggleSidebarVisibility` | Toggle Sidebar Visibility     |
-| `Ctrl+Alt` `s`   | `workbench.action.files.save`          | Save Current File             |
-| `Ctrl+Alt` `w`   | `workbench.action.closeActiveEditor`   | Close Active Editor (Window)  |
+| Key         | Command                              | Description                 |
+| :---------- | :----------------------------------- | :-------------------------- |
+| `space f s` | `workbench.action.files.save`        | **F**ile **S**ave           |
+| `space f w` | `workbench.action.closeActiveEditor` | **F**ile **W**indow (Close) |
+| `space b b` | `workbench.action.showAllEditors`    | Show All **B**uffers        |
+| `space b ]` | `workbench.action.nextEditor`        | Next **B**uffer             |
+| `space b [` | `workbench.action.previousEditor`    | Previous **B**uffer         |
 
-## Credit
-Yes, this readme is AI generated. shoutout to Gemini fr
+#### Terminal (`<Space> t`)
+
+| Key         | Command                                   | Description              |
+| :---------- | :---------------------------------------- | :----------------------- |
+| `space t t` | `workbench.action.terminal.focus`         | Focus **T**erminal       |
+| `space t n` | `workbench.action.terminal.new`           | **N**ew Terminal         |
+| `space t d` | `workbench.action.terminal.kill`          | **D**elete/Kill Terminal |
+| `space t ]` | `workbench.action.terminal.focusNext`     | Next Terminal            |
+| `space t [` | `workbench.action.terminal.focusPrevious` | Previous Terminal        |
+| `space t 1` | `workbench.action.terminal.focusAtIndex1` | Focus Terminal 1         |
+
+#### Language & Diagnostics (`<Space> l`)
+
+| Key         | Command                            | Description                  |
+| :---------- | :--------------------------------- | :--------------------------- |
+| `space l d` | `editor.action.goToDeclaration`    | **D**eclaration              |
+| `space l i` | `editor.action.goToImplementation` | **I**mplementation           |
+| `space l r` | `editor.action.rename`             | **R**ename                   |
+| `space l a` | `editor.action.quickFix`           | Code **A**ctions (Quick Fix) |
+| `space l h` | `editor.action.showHover`          | **H**over Info               |
+| `space l p` | `workbench.actions.view.problems`  | Show **P**roblems Panel      |
+
+#### Search (`<Space> s`), Project (`<Space> p`), and Git (`<Space> g`)
+
+| Key         | Command                         | Description                    |
+| :---------- | :------------------------------ | :----------------------------- |
+| `space s f` | `workbench.action.findInFiles`  | **S**earch **F**iles (Project) |
+| `space s s` | `workbench.action.gotoSymbol`   | **S**earch **S**ymbol in File  |
+| `space p p` | `workbench.action.showCommands` | Show Command **P**alette       |
+| `space g g` | `workbench.view.scm`            | Show **G**it/SCM Panel         |

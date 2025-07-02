@@ -5,13 +5,10 @@
   "editor.fontLigatures": true,
   "workbench.statusBar.visible": false,
   "workbench.sideBar.location": "right",
-  "workbench.activityBar.location": "hidden",
   "workbench.colorTheme": "Ayu Dark",
-
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
   // "go.formatTool": "gopls",
@@ -19,22 +16,19 @@
   "go.lintOnSave": "file",
   "go.testOnSave": true,
   "go.vetOnSave": "off",
-
   "rest-client.previewOption": "exchange",
   "rest-client.timeoutInMilliseconds": 10000,
-
   "markdown.preview.breaks": true,
   "markdown.preview.fontSize": 14,
   "markdown.preview.lineHeight": 1.6,
-
   "redhat.telemetry.enabled": false,
-
   "[solidity]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
-
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "solidity.telemetry": true,
+  "workbench.activityBar.location": "hidden"
 }

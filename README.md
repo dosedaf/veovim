@@ -1,4 +1,4 @@
-# Ergonomic Neovim: A VS Code Profile for Compact Keyboards
+# Veovim: A VS Code Profile for Compact Keyboards Built with VSCode Neovim Extension
 
 This Visual Studio Code profile has been completely refactored for an ergonomic, keyboard-centric workflow, specifically tailored for **60% and other compact keyboards**. It eliminates uncomfortable key combinations in favor of a fast, logical, and comfortable leader key system.
 

@@ -1,132 +1,96 @@
-# Veovim: A VS Code Profile for Compact Keyboards Built with VSCode Neovim Extension
+# Veovim: VS Code Keybindings for Neovim Users
 
-This Visual Studio Code profile has been completely refactored for an ergonomic, keyboard-centric workflow, specifically tailored for **60% and other compact keyboards**. It eliminates uncomfortable key combinations in favor of a fast, logical, and comfortable leader key system.
+This document outlines a highly ergonomic and philosophically consistent set of keybindings for Visual Studio Code, designed specifically for users who rely heavily on the [VSCode Neovim](https://marketplace.visualstudio.com/items?itemName=vscode-neovim.neovim) extension.
 
-The entire configuration is built around the **VSCode Neovim** extension, assuming a modal editing workflow where the keyboard is your primary tool.
+The goal is to blend the modal efficiency of Neovim with the powerful UI and features of VS Code, creating a seamless and intuitive workflow that minimizes finger strain and cognitive load.
 
----
-
-## Core Philosophy
-
-- **Ergonomics First:** Every keybinding is designed to reduce hand strain. Uncomfortable combinations like `Ctrl+Alt` have been completely replaced with simpler, more accessible patterns.
-- **Leader Keys are King:** Instead of complex chords requiring multiple simultaneous key presses, this setup relies on easy-to-press leader keys (`Alt` and `<Space>`) followed by simple, mnemonic characters.
-- **Logical Namespaces:** Commands are grouped into intuitive "menus" under the `<Space>` leader. Want to do something with a terminal? All commands start with `space t`. Language-specific actions? `space l`. This makes the system predictable and easy to learn.
-- **Distraction-Free UI:** The profile is designed to work with a minimalist UI (hidden activity bar, status bar, etc.) to maximize focus on the code.
+_Last Updated: July 6, 2025_
 
 ---
 
-## Key Features
+## The Core Philosophy
 
-- **Dual Leader Key System:**
-  - **`Alt` Leader (Global):** Your go-to for essential, global workbench actions like toggling UI panels. It's simple, fast, and works from anywhere in VS Code.
-  - **`<Space>` Leader (Modal):** Your primary command center while in Neovim's Normal Mode. It's a powerful and organized menu for all file, project, and editor-specific actions.
-- **Optimized for Compact Keyboards:** By avoiding multi-modifier chords, this setup is perfect for 60% layouts where function keys and other keys are on different layers.
-- **Full Neovim Integration:** All `<Space>` keybindings are carefully configured with `when` clauses to only be active outside of Insert Mode, ensuring the spacebar works as expected when typing.
+This configuration is built on a simple but powerful principle: **separate your in-editor actions from your UI management actions.**
+
+### 1. `<Space>` is your In-Editor "Leader" Key
+
+The `Space` key acts as the leader for all commands that **keep your focus within the editor**. These are actions related to your code workflow: finding files, navigating symbols, cycling through buffers, and using LSP features. Using `<Space>` keeps these common actions fast, ergonomic, and close to the home row, extending Neovim's grammar without leaving the editing context.
+
+### 2. `Alt` is your UI Management Key
+
+The `Alt` key is used for all commands that **manage the VS Code user interface or change focus to a different panel**. This includes opening the explorer, focusing the terminal, toggling the sidebar, or hiding panels. This creates a clear mental model: `Alt` manipulates the "chrome" of the application, while `<Space>` manipulates the code within it.
 
 ---
 
 ## Installation
 
-### Prerequisites
-
-You **must** have [Neovim](https://neovim.io/) (v0.5.0 or newer) installed and available in your system's PATH.
-
-### Steps
-
-1.  **Install Extensions:** Run the command below in your terminal to install all the necessary extensions for this profile.
-
-    ```bash
-    #!/bin/bash
-    EXTENSIONS=(
-      "asvetliakov.vscode-neovim"
-      "eamodio.gitlens"
-      "formulahendry.code-runner"
-      "golang.go"
-      "humao.rest-client"
-      "kevinrose.vsc-python-indent"
-      "mechatroner.rainbow-csv"
-      "ms-azuretools.vscode-docker"
-      "ms-python.python"
-      "ms-python.vscode-pylance"
-      "ms-toolsai.jupyter"
-      "ms-vscode.cpptools"
-      "redhat.java"
-      "teabyii.ayu"
-      "usernamehw.errorlens"
-      "visualstudioexptteam.vscodeintellicode"
-      "vscjava.vscode-java-pack"
-      "wakatime.vscode-wakatime"
-    )
-
-    for extension in ${EXTENSIONS[@]}; do
-      code --install-extension $extension
-    done
-    ```
-
-2.  **Configure `keybindings.json`:** Replace the entire contents of your `keybindings.json` file (`Preferences: Open Keyboard Shortcuts (JSON)`) with the new configuration.
-
-3.  **Configure `settings.json`:** Ensure your `settings.json` reflects your minimalist UI preferences (hiding activity bar, etc.).
+1.  Open the Command Palette: `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS).
+2.  Search for and select **"Preferences: Open Keyboard Shortcuts (JSON)"**.
+3.  Copy the entire `keybindings.json` configuration we've built and paste it into this file.
+4.  Save the file. The keybindings will be active immediately.
 
 ---
 
 ## Keybinding Cheatsheet
 
-### Global Leader Key: `Alt`
+### In-Editor Workflows (`<Space>` Leader Key)
 
-These are your instant-access global commands that work from anywhere.
+_Actions that keep you in the flow of editing code._
 
-| Key     | Command                                        | Description                  |
-| :------ | :--------------------------------------------- | :--------------------------- |
-| `alt+f` | `workbench.view.explorer`                      | Toggle File Explorer         |
-| `alt+o` | `workbench.action.quickOpen`                   | Quick Open File (Go to File) |
-| `alt+t` | `workbench.action.terminal.focus`              | Focus Terminal               |
-| `alt+p` | `workbench.action.showCommands`                | Show Command Palette         |
-| `alt+g` | `workbench.view.scm`                           | Show Git/SCM Panel           |
-| `alt+v` | `workbench.action.toggleSidebarVisibility`     | Toggle Sidebar Visibility    |
-| `alt+a` | `workbench.action.toggleActivityBarVisibility` | Toggle Activity Bar          |
-| `alt+m` | `workbench.action.toggleMenuBar`               | Toggle Menu Bar              |
+| Keybinding        | Description                                           | VS Code Command                    |
+| :---------------- | :---------------------------------------------------- | :--------------------------------- |
+| `<Space>` `y`     | Yank selection to system clipboard _(in Visual Mode)_ | `vscode-neovim.send`               |
+| `<Space>` `f`     | Fuzzy-find a file (Quick Open)                        | `workbench.action.quickOpen`       |
+| `<Space>` `/`     | Find in all files (project-wide search)               | `workbench.action.findInFiles`     |
+| `<Space>` `s`     | Go to symbol in the current file                      | `workbench.action.gotoSymbol`      |
+| `<Space>` `g` `d` | Go to definition                                      | `editor.action.revealDefinition`   |
+| `<Space>` `g` `i` | Go to implementation                                  | `editor.action.goToImplementation` |
+| `<Space>` `l`     | Cycle to the next editor/buffer                       | `workbench.action.nextEditor`      |
+| `<Space>` `h`     | Cycle to the previous editor/buffer                   | `workbench.action.previousEditor`  |
 
-### Primary Leader Key: `<Space>` (Normal Mode Only)
+### Panel & UI Management (`Alt` Modifier)
 
-This is your main command menu from within Neovim's Normal Mode.
+_Actions for managing the VS Code interface and changing focus._
 
-#### File & Buffer (`<Space> f`, `<Space> b`)
+| Keybinding        | Description                               | VS Code Command                            |
+| :---------------- | :---------------------------------------- | :----------------------------------------- |
+| `Alt` `j`         | **Focus on the editor group**             | `workbench.action.focusActiveEditorGroup`  |
+| `Alt` `k`         | **Toggle visibility of the bottom panel** | `workbench.action.togglePanel`             |
+| `Alt` `b`         | Toggle visibility of the sidebar          | `workbench.action.toggleSidebarVisibility` |
+| `Alt` `m`         | Toggle visibility of the menu bar         | `workbench.action.toggleMenuBar`           |
+| `Alt` `e`         | Toggle visibility of the file explorer    | `workbench.view.explorer`                  |
+| `Alt` `t`         | Focus on the terminal panel               | `workbench.action.terminal.focus`          |
+| `Alt` `Shift` `t` | Create a new terminal                     | `workbench.action.terminal.new`            |
+| `Alt` `x`         | Open the extensions view                  | `workbench.view.extensions`                |
+| `Alt` `p`         | Toggle visibility of the problems panel   | `workbench.actions.view.problems`          |
 
-| Key         | Command                              | Description                 |
-| :---------- | :----------------------------------- | :-------------------------- |
-| `space f s` | `workbench.action.files.save`        | **F**ile **S**ave           |
-| `space f w` | `workbench.action.closeActiveEditor` | **F**ile **W**indow (Close) |
-| `space b b` | `workbench.action.showAllEditors`    | Show All **B**uffers        |
-| `space b ]` | `workbench.action.nextEditor`        | Next **B**uffer             |
-| `space b [` | `workbench.action.previousEditor`    | Previous **B**uffer         |
+### Contextual: Terminal Management
 
-#### Terminal (`<Space> t`)
+_Shortcuts that work **only when the terminal is focused**._
 
-| Key         | Command                                   | Description              |
-| :---------- | :---------------------------------------- | :----------------------- |
-| `space t t` | `workbench.action.terminal.focus`         | Focus **T**erminal       |
-| `space t n` | `workbench.action.terminal.new`           | **N**ew Terminal         |
-| `space t d` | `workbench.action.terminal.kill`          | **D**elete/Kill Terminal |
-| `space t ]` | `workbench.action.terminal.focusNext`     | Next Terminal            |
-| `space t [` | `workbench.action.terminal.focusPrevious` | Previous Terminal        |
-| `space t 1` | `workbench.action.terminal.focusAtIndex1` | Focus Terminal 1         |
+| Keybinding | Description                              | VS Code Command                           |
+| :--------- | :--------------------------------------- | :---------------------------------------- |
+| `Alt` `s`  | Split the active terminal                | `workbench.action.terminal.split`         |
+| `Alt` `w`  | Cycle focus between split terminal panes | `workbench.action.terminal.focusNextPane` |
+| `Alt` `q`  | Kill the focused terminal                | `workbench.action.terminal.kill`          |
+| `Alt` `l`  | Cycle to the next terminal tab           | `workbench.action.terminal.focusNext`     |
+| `Alt` `h`  | Cycle to the previous terminal tab       | `workbench.action.terminal.focusPrevious` |
 
-#### Language & Diagnostics (`<Space> l`)
+### Contextual: Explorer Management
 
-| Key         | Command                            | Description                  |
-| :---------- | :--------------------------------- | :--------------------------- |
-| `space l d` | `editor.action.goToDeclaration`    | **D**eclaration              |
-| `space l i` | `editor.action.goToImplementation` | **I**mplementation           |
-| `space l r` | `editor.action.rename`             | **R**ename                   |
-| `space l a` | `editor.action.quickFix`           | Code **A**ctions (Quick Fix) |
-| `space l h` | `editor.action.showHover`          | **H**over Info               |
-| `space l p` | `workbench.actions.view.problems`  | Show **P**roblems Panel      |
+_Shortcuts that work **only when the file explorer is focused**._
 
-#### Search (`<Space> s`), Project (`<Space> p`), and Git (`<Space> g`)
+| Keybinding  | Description                        | VS Code Command      |
+| :---------- | :--------------------------------- | :------------------- |
+| `a`         | Create a new file                  | `explorer.newFile`   |
+| `Shift` `a` | Create a new directory             | `explorer.newFolder` |
+| `d`         | Delete the selected file/directory | `deleteFile`         |
+| `r`         | Rename the selected file/directory | `renameFile`         |
 
-| Key         | Command                         | Description                    |
-| :---------- | :------------------------------ | :----------------------------- |
-| `space s f` | `workbench.action.findInFiles`  | **S**earch **F**iles (Project) |
-| `space s s` | `workbench.action.gotoSymbol`   | **S**earch **S**ymbol in File  |
-| `space p p` | `workbench.action.showCommands` | Show Command **P**alette       |
-| `space g g` | `workbench.view.scm`            | Show **G**it/SCM Panel         |
+---
+
+## A Note on Customization
+
+This keybinding set is designed to be a powerful and ergonomic starting point. Feel free to treat it as a template. You can easily edit the `keybindings.json` file to change, add, or remove shortcuts to perfectly match your personal workflow.
+
+Happy grinding!

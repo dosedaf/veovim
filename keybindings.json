@@ -1,243 +1,172 @@
+// This profile separates in-editor actions from panel management.
 [
-  // =======================================
-  // Global Leader Key (Alt) - Simple & Ergonomic
-  // =======================================
+  // ===================================================================
+  //  1. In-Editor Workflows (<Space> Leader Key)
+  //  - Use for actions that DO NOT move focus away from the editor.
+  //  - "editorTextFocus" ensures these only trigger when the editor is active.
+  // ===================================================================
   {
-    "key": "alt+f",
-    "command": "workbench.view.explorer"
+    "key": "space y",
+    "command": "vscode-neovim.send",
+    "args": {
+      "args": [
+        "\"+y"
+      ]
+    },
+    "when": "(neovim.mode == 'visual' || neovim.mode == 'visualLine') && editorTextFocus",
+    "comment": "Yank selection to the system clipboard."
   },
   {
-    "key": "alt+o",
-    "command": "workbench.action.quickOpen"
+    "key": "space f",
+    "command": "workbench.action.quickOpen",
+    "when": "neovim.mode != 'insert' && editorTextFocus",
+    "comment": "Fuzzy find a file (quick open)."
   },
   {
-    "key": "alt+t",
-    "command": "workbench.action.terminal.focus"
+    "key": "space /",
+    "command": "workbench.action.findInFiles",
+    "when": "neovim.mode != 'insert' && editorTextFocus",
+    "comment": "Find in all files (opens search panel but is part of code discovery)."
   },
   {
-    "key": "alt+p",
-    "command": "workbench.action.showCommands"
+    "key": "space s",
+    "command": "workbench.action.gotoSymbol",
+    "when": "neovim.mode != 'insert' && editorTextFocus",
+    "comment": "Go to a symbol in the current editor."
   },
   {
-    "key": "alt+g",
-    "command": "workbench.view.scm"
+    "key": "space g d",
+    "command": "editor.action.revealDefinition",
+    "when": "neovim.mode != 'insert' && editorHasDefinitionProvider && editorTextFocus",
+    "comment": "Go to definition."
   },
   {
-    "key": "alt+v",
-    "command": "workbench.action.toggleSidebarVisibility"
+    "key": "space g i",
+    "command": "editor.action.goToImplementation",
+    "when": "neovim.mode != 'insert' && editorHasImplementationProvider && editorTextFocus",
+    "comment": "Go to implementation."
   },
   {
-    "key": "alt+a",
-    "command": "workbench.action.toggleActivityBarVisibility"
+    "key": "space l",
+    "command": "workbench.action.nextEditor",
+    "when": "neovim.mode != 'insert' && editorTextFocus",
+    "comment": "Cycle to the next buffer/editor tab."
+  },
+  {
+    "key": "space h",
+    "command": "workbench.action.previousEditor",
+    "when": "neovim.mode != 'insert' && editorTextFocus",
+    "comment": "Cycle to the previous buffer/editor tab."
+  },
+  // ===================================================================
+  //  2. Panel & UI Management (Alt Modifier)
+  //  - Use for actions that DO move focus to other panels.
+  // ===================================================================
+  {
+    "key": "alt+j",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "comment": "Focus on the editor group (from any panel)."
+  },
+  {
+    "key": "alt+k",
+    "command": "workbench.action.togglePanel",
+    "comment": "Toggle visibility of the entire bottom panel (Terminal, Problems, etc.)."
+  },
+  {
+    "key": "alt+b",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "comment": "Toggle sidebar visibility."
   },
   {
     "key": "alt+m",
-    "command": "workbench.action.toggleMenuBar"
-  },
-  // =======================================
-  // Primary Leader Key (<Space>) - Normal Mode Only
-  // =======================================
-  // --- File & Buffer Namespace (<Space> f & <Space> b) ---
-  {
-    "key": "space f s",
-    "command": "workbench.action.files.save",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
+    "command": "workbench.action.toggleMenuBar",
+    "comment": "Toggle menu bar visibility."
   },
   {
-    "key": "space f w",
-    "command": "workbench.action.closeActiveEditor",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
+    "key": "alt+e",
+    "command": "workbench.view.explorer",
+    "comment": "Open/toggle the file explorer."
   },
   {
-    "key": "space b b",
-    "command": "workbench.action.showAllEditors",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space b ]",
-    "command": "workbench.action.nextEditor",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space b [",
-    "command": "workbench.action.previousEditor",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  // --- Git Namespace (<Space> g) ---
-  {
-    "key": "space g g",
-    "command": "workbench.view.scm",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  // --- Terminal Namespace (<Space> t) ---
-  {
-    "key": "space t t",
+    "key": "alt+t",
     "command": "workbench.action.terminal.focus",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
+    "comment": "Focus on the terminal panel (without creating a new one)."
   },
   {
-    "key": "space t n",
+    "key": "alt+shift+t",
     "command": "workbench.action.terminal.new",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
+    "comment": "Create a new terminal."
   },
   {
-    "key": "space t d",
-    "command": "workbench.action.terminal.kill",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space t ]",
-    "command": "workbench.action.terminal.focusNext",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space t [",
-    "command": "workbench.action.terminal.focusPrevious",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space t 1",
-    "command": "workbench.action.terminal.focusAtIndex1",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space t 2",
-    "command": "workbench.action.terminal.focusAtIndex2",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space t 3",
-    "command": "workbench.action.terminal.focusAtIndex3",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  // --- Project & Palettes (<Space> p) ---
-  {
-    "key": "space p p",
-    "command": "workbench.action.showCommands",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  // --- Search & Symbols Namespace (<Space> s) ---
-  {
-    "key": "space s f",
-    "command": "workbench.action.findInFiles",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space s s",
-    "command": "workbench.action.gotoSymbol",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  // --- Language & Diagnostics Namespace (<Space> l) ---
-  {
-    "key": "space l d",
-    "command": "editor.action.goToDeclaration",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space l i",
-    "command": "editor.action.goToImplementation",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space l r",
-    "command": "editor.action.rename",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space l a",
-    "command": "editor.action.quickFix",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space l h",
-    "command": "editor.action.showHover",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  {
-    "key": "space l p",
-    "command": "workbench.actions.view.problems",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  // --- Other Space Mappings ---
-  {
-    "key": "space e",
+    "key": "alt+x",
     "command": "workbench.view.extensions",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
+    "comment": "Open the extensions view."
   },
   {
-    "key": "space i i",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
+    "key": "alt+p",
+    "command": "workbench.actions.view.problems",
+    "comment": "Toggle visibility of the 'problems' panel (opens and closes it)."
+  },
+  // ===================================================================
+  //  3. Contextual: Terminal Management
+  //  - These keys work ONLY when you are focused on the terminal.
+  // ===================================================================
+  {
+    "key": "alt+s",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus",
+    "comment": "Split the active terminal."
   },
   {
-    "key": "space rr",
-    "command": "rest-client.request",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
+    "key": "alt+w",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus",
+    "comment": "Cycle focus between split terminal panes."
   },
   {
-    "key": "space md",
-    "command": "markdown.showPreview",
-    "when": "editorTextFocus && neovim.mode != 'insert'"
-  },
-  // =======================================
-  // Other Global Bindings (Standard & Ergonomic)
-  // =======================================
-  {
-    "key": "ctrl+tab",
-    "command": "workbench.action.nextEditor"
+    "key": "alt+q",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus",
+    "comment": "Kill the focused terminal."
   },
   {
-    "key": "ctrl+shift+tab",
-    "command": "workbench.action.previousEditor"
+    "key": "alt+l",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus",
+    "comment": "Cycle to the next terminal tab."
   },
   {
-    "key": "alt+1",
-    "command": "workbench.action.openEditorAtIndex1"
+    "key": "alt+h",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus",
+    "comment": "Cycle to the previous terminal tab."
   },
-  {
-    "key": "alt+2",
-    "command": "workbench.action.openEditorAtIndex2"
-  },
-  {
-    "key": "alt+3",
-    "command": "workbench.action.openEditorAtIndex3"
-  },
-  {
-    "key": "alt+]",
-    "command": "editor.action.marker.next"
-  },
-  {
-    "key": "alt+[",
-    "command": "editor.action.marker.prev"
-  },
-  // --- File Explorer Actions ---
+  // ===================================================================
+  //  4. Contextual: Explorer File/Directory Management
+  //  - These keys work ONLY when you are focused on the explorer.
+  // ===================================================================
   {
     "key": "a",
     "command": "explorer.newFile",
-    "when": "filesExplorerFocus && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus",
+    "comment": "Create a new file."
   },
   {
     "key": "shift+a",
     "command": "explorer.newFolder",
-    "when": "filesExplorerFocus && !inputFocus"
-  },
-  // =======================================
-  // Unbind Conflicting Defaults
-  // =======================================
-  {
-    "key": "ctrl+f",
-    "command": "-actions.find"
+    "when": "filesExplorerFocus && !inputFocus",
+    "comment": "Create a new directory."
   },
   {
-    "key": "ctrl+e",
-    "command": "-workbench.action.quickOpen"
+    "key": "d",
+    "command": "deleteFile",
+    "when": "filesExplorerFocus && !inputFocus",
+    "comment": "Delete the selected file/directory."
   },
   {
-    "key": "ctrl+shift+x",
-    "command": "-workbench.view.extensions"
-  },
-  {
-    "key": "ctrl+k e",
-    "command": "-workbench.files.action.focusOpenEditorsView"
+    "key": "r",
+    "command": "renameFile",
+    "when": "filesExplorerFocus && !inputFocus",
+    "comment": "Rename the selected file/directory."
   }
 ]
